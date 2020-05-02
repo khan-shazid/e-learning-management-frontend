@@ -13,7 +13,8 @@ const routes = {
   lessonByCourse: `${BASE_URL}lesson-by-course/`,
   lessonDetails: `${BASE_URL}lesson-details/`,
   lessonDetailsForExam: `${BASE_URL}lesson-details-exam/`,
-  exam: `${BASE_URL}exam`
+  exam: `${BASE_URL}exam`,
+  previousExams: `${BASE_URL}previous-exams`
 };
 
 // Axios request interceptor

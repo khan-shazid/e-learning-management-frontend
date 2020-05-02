@@ -169,7 +169,7 @@ class GiveExam extends Component {
                     <div className="form-group">
                       <label htmlFor="exampleInputEmail1">Select Lesson</label>
                       <select className="browser-default custom-select" name="selectedLesson" value={selectedLesson} onChange={this.onChange}>
-                        <option value="">Select Course</option>
+                        <option value="">Select Lesson</option>
                         {
                           lessonList.map((item,i)=>
                             (<option key={i} value={item.id}>{item.title}</option>)

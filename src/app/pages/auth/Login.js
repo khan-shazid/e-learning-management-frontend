@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import { Link } from 'react-router-dom';
 
 import Http from '../../services/Http';
 import { toastSuccess,toastError } from '../../commonComponents/Toast';
@@ -75,13 +76,22 @@ class Login extends Component {
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input type="password" className="form-control" name="password" value={password} onChange={this.onChange} placeholder="Password"/>
               </div>
-              <BWL
-                title="Login"
-                loader={loading}
-                buttonStyle="primary"
-                loaderStyle={LOADER_STYLE}
-                dimen={DIMEN}
-                onClick={this.submit} />
+              <div className="row">
+                <div className="col-md-6">
+                  <BWL
+                    title="Login"
+                    loader={loading}
+                    buttonStyle="primary"
+                    loaderStyle={LOADER_STYLE}
+                    dimen={DIMEN}
+                    onClick={this.submit} />
+                </div>
+                <div className="col-md-6" style={{textAlign:'right'}}>
+                  <Link to='/register'>
+                      Go to register
+                  </Link>
+                </div>
+              </div>
             </div>
         );
     }

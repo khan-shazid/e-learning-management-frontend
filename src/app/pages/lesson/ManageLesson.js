@@ -203,7 +203,7 @@ class ManageLesson extends Component {
                 <hr/>
                 <Title value="Add Question Panel"/>
                 <div className="question-panel" style={{padding:20,background:'#c7c7ba'}}>
-                  <label for="exampleInputEmail1">Select Course</label>
+                  <label htmlFor="exampleInputEmail1">Select Course</label>
                   <select className="browser-default custom-select" name="selectedCourse" value={selectedCourse} onChange={this.onChange}>
                     <option value="">Select Course</option>
                     {
@@ -217,7 +217,7 @@ class ManageLesson extends Component {
                   }
                   <br/>
                   <br/>
-                  <label for="exampleInputEmail1">Select Lesson</label>
+                  <label htmlFor="exampleInputEmail1">Select Lesson</label>
                   <select className="browser-default custom-select" name="selectedLesson" value={selectedLesson} onChange={this.onChange}>
                     <option value="">Select Course</option>
                     {
@@ -232,7 +232,7 @@ class ManageLesson extends Component {
                   <br/>
                   <br/>
                   <div className="form-group">
-                    <label for="exampleInputEmail1">Question Text</label>
+                    <label htmlFor="exampleInputEmail1">Question Text</label>
                     <input type="text" className="form-control" name="questionText" value={questionText} onChange={this.onChange} placeholder="Enter Question Text"/>
                     {
                       questionTextError ? <span style={{color:'red'}}>{questionTextError}</span> : ''

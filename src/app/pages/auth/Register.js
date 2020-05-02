@@ -45,6 +45,7 @@ class Register extends Component {
               toastSuccess(data.message);
               localStorage.setItem('token',data.data);
               localStorage.setItem('role',data.role);
+              localStorage.setItem('name',data.name);
               this.props.history.push('/');
             }else{
               toastError(data.message);
@@ -67,16 +68,16 @@ class Register extends Component {
         return (
           <div style={{marginLeft:500,marginRight:500,marginTop:200,padding:20,background:'#e4e4e4'}}>
           <div className="form-group">
-            <label for="exampleInputEmail1">Name</label>
+            <label htmlFor="exampleInputEmail1">Name</label>
             <input type="email" className="form-control" name="name" value={name} onChange={this.onChange} placeholder="Enter Name"/>
           </div>
             <div className="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label htmlFor="exampleInputEmail1">Email address</label>
               <input type="email" className="form-control" name="email" value={email} onChange={this.onChange} placeholder="Enter email"/>
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label htmlFor="exampleInputPassword1">Password</label>
               <input type="password" className="form-control" name="password" value={password} onChange={this.onChange} placeholder="Password"/>
             </div>
             <BWL

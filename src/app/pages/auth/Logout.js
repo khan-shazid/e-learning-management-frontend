@@ -19,6 +19,7 @@ class Logout extends Component {
     componentDidMount = () => {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
+      localStorage.removeItem('name');
       this.setState({
         flag : true
       })

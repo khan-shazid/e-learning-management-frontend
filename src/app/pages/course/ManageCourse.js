@@ -65,7 +65,7 @@ class ManageCourse extends Component {
             <div>
               <Title value="Manage Course"/>
               <div className="form-group">
-                <label for="exampleInputEmail1">Course Title</label>
+                <label htmlFor="exampleInputEmail1">Course Title</label>
                 <input type="text" className="form-control" name="title" value={title} onChange={this.onChange} placeholder="Enter Course Title"/>
               </div>
               <BWL

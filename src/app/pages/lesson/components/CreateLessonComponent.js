@@ -65,12 +65,12 @@ class CreateLessonComponent extends Component {
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label for="exampleInputEmail1">Lesson Title</label>
+                    <label htmlFor="exampleInputEmail1">Lesson Title</label>
                     <input type="email" className="form-control" name="title" onChange={this.onChange} value={title} placeholder="Enter Lesson Title"/>
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label for="exampleInputEmail1">Parent Course</label>
+                  <label htmlFor="exampleInputEmail1">Parent Course</label>
                   <select className="browser-default custom-select" name="selectedCourse" value={selectedCourse} onChange={this.onChange}>
                     <option value="">Select Course</option>
                     {

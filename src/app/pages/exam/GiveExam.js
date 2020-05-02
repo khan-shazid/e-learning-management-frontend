@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
 
 import Http from '../../services/Http';
 import Title from '../../partials/Title';
@@ -21,7 +20,8 @@ class GiveExam extends Component {
             selectedCourse : '',
             selectedLesson : '',
             data : [],
-            answers : {}
+            answers : {},
+            mark:''
         };
     }
 
@@ -50,10 +50,15 @@ class GiveExam extends Component {
 
     onChange=(e)=>{
       this.setState({
-        [e.target.name]:e.target.value
+        [e.target.name] : e.target.value,
+        mark : '',
+        data : []
       })
       if(e.target.name=='selectedCourse' && e.target.value){
         this.fetchLessons(e.target.value);
+        this.setState({
+          selectedLesson : ''
+        })
       }
       if(e.target.name=='selectedLesson' && e.target.value){
         this.fetchLessonDetails(e.target.value);
@@ -80,7 +85,7 @@ class GiveExam extends Component {
     }
 
     fetchLessonDetails = (lessonId) => {
-      Http.GET('lessonDetails',lessonId)
+      Http.GET('lessonDetailsForExam',lessonId)
           .then(({data}) => {
             console.log('lessonList SUCCESS: ', data);
 
@@ -106,14 +111,45 @@ class GiveExam extends Component {
       });
     }
 
-    submit = () => {
-      console.log("asnwers",this.state.answers)
+    submit = async() => {
+      this.setState({loading:true})
+      let { selectedCourse, selectedLesson, answers } = this.state;
+      let body = {
+        course_id : selectedCourse,
+        lesson_id : selectedLesson,
+        data : answers
+      }
+      await Http.POST('exam',body)
+        .then(({data}) => {
+          this.setState({
+            loading:false
+          })
+          if(data.success){
+          console.log('exam SUCCESS: ', JSON.stringify(data));
+            toastSuccess(data.message);
+            this.setState({
+              mark:data.data
+            })
+          }else{
+            toastError(data.message);
+          }
+
+        })
+        .catch(response => {
+            this.setState({
+              loading:false
+            })
+            console.log('exam Error: ', JSON.stringify(response));
+            toastError("Something went wrong! Please try again.");
+        });
+
     }
 
     render() {
-      const { loading, courseList, lessonList, selectedCourse, selectedLesson, data } = this.state;
+      const { loading, courseList, lessonList, selectedCourse, selectedLesson, data, mark } = this.state;
         return (
             <>
+              <Title value="Give An Exam!"/>
               <div className="all-details">
                 <div className="row">
                   <div className="col-md-6">
@@ -143,6 +179,9 @@ class GiveExam extends Component {
                     </div>
                   </div>
                 </div>
+                {
+                  mark!=='' ? <h1 style={{color:'green'}}>Your obtained mark is {mark}</h1> : ''
+                }
                 {
                   data.map((item,i)=>{
                     let options = item.options.map((item2,j)=>{

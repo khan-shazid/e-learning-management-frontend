@@ -7,6 +7,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 import ManageCourse from './pages/course/ManageCourse';
 import ManageLesson from './pages/lesson/ManageLesson';
 import GiveExam from './pages/exam/GiveExam';
+import GivenExamList from './pages/exam/GiveExam';
 import Login from './pages/auth/Login';
 import Logout from './pages/auth/Logout';
 import Register from './pages/auth/Register';
@@ -46,6 +47,7 @@ class Root extends Component {
                   <PrivateRoute exact path="/course" component={ ManageCourse }/>
                   <PrivateRoute exact path="/lesson" component={ ManageLesson }/>
                   <PrivateRoute exact path="/exam" component={ GiveExam }/>
+                  <PrivateRoute exact path="/previous-exams" component={ GivenExamList }/>
                   <PrivateRoute exact path="/logout" component={ Logout }/>
                   {/*<PublicRoute path="/resource-list/:resourceId" component={ EditResource }/>*/}
                   <PrivateRoute exact path="/" component={ GiveExam }/>

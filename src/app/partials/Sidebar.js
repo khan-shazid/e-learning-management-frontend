@@ -11,20 +11,23 @@ class Sidebar extends Component {
         this.state = {
             activeTab: window.location.pathname,
             parentTab: '',
-            role: ''
+            role: '',
+            name: ''
         };
     }
 
     componentDidMount = () =>{
       let role = localStorage.getItem('role');
+      let name = localStorage.getItem('name');
       this.setState({
-        role
+        role,
+        name
       })
       console.log("route",this.state.activeTab)
     }
 
     render() {
-        let { role } = this.state;
+        let { role, name } = this.state;
         return (
           <nav id="sidebar">
               <div className="sidebar-header">
@@ -32,24 +35,10 @@ class Sidebar extends Component {
               </div>
 
               <ul className="list-unstyled components">
-                  <p>Obydul Islam Khan</p>
-                  {/*<li className={ (this.state.activeTab === '/') ? 'active' : '' }>
-                      <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Home</a>
-                      <ul className="collapse list-unstyled" id="homeSubmenu">
-                          <li>
-                              <a href="#">Home 1</a>
-                          </li>
-                          <li>
-                              <a href="#">Home 2</a>
-                          </li>
-                          <li>
-                              <a href="#">Home 3</a>
-                          </li>
-                      </ul>
-                  </li>*/}
+                  <p>{name}</p>
                   {
                     role=='admin' &&
-                    <li className={ (this.state.activeTab === '/' || this.state.activeTab === '/course') ? 'active' : '' }>
+                    <li className={ (this.state.activeTab === '/course') ? 'active' : '' }>
                           <Link to='/course'
                                 onClick={ (e) => {
                                     this.setState({
@@ -73,7 +62,7 @@ class Sidebar extends Component {
                       </Link>
                     </li>
                   }
-                  <li className={ (this.state.activeTab.includes('/exam')) ? 'active' : '' }>
+                  <li className={ (this.state.activeTab === '/' || this.state.activeTab.includes('/exam')) ? 'active' : '' }>
                     <Link to='/exam'
                           onClick={ (e) => {
                               this.setState({
@@ -81,6 +70,21 @@ class Sidebar extends Component {
                               });
                           } }>
                         Exam
+                    </Link>
+                  </li>
+                  <li className={ (this.state.activeTab.includes('/previous-exams')) ? 'active' : '' }>
+                    <Link to='/previous-exams'
+                          onClick={ (e) => {
+                              this.setState({
+                                  activeTab: '/previous-exams'
+                              });
+                          } }>
+                        Previous Exams
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to='/logout'>
+                        Logout
                     </Link>
                   </li>
               </ul>

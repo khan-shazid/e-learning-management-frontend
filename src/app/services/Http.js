@@ -11,7 +11,9 @@ const routes = {
   question: `${BASE_URL}question`,
   lesson: `${BASE_URL}lesson`,
   lessonByCourse: `${BASE_URL}lesson-by-course/`,
-  lessonDetails: `${BASE_URL}lesson-details/`
+  lessonDetails: `${BASE_URL}lesson-details/`,
+  lessonDetailsForExam: `${BASE_URL}lesson-details-exam/`,
+  exam: `${BASE_URL}exam`
 };
 
 // Axios request interceptor
@@ -33,6 +35,7 @@ axios.interceptors.response.use((response) => {
         setTimeout(() => {
             localStorage.removeItem('token');
             localStorage.removeItem('role');
+            localStorage.removeItem('name');
             delete axios.defaults.headers.common['Authorization'];
             // store.dispatch({
             //     type: REDIRECT_TO,

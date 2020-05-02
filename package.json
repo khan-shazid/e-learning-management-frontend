@@ -2,7 +2,6 @@
   "name": "e-learning-management",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ec2-3-14-141-240.us-east-2.compute.amazonaws.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -16,11 +15,11 @@
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
     "react-scripts": "3.3.0",
+    "react-toastify": "^5.5.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

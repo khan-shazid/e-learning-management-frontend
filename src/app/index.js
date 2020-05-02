@@ -6,33 +6,35 @@ import DefaultLayout from './layouts/DefaultLayout';
 
 import ManageCourse from './pages/course/ManageCourse';
 import ManageLesson from './pages/lesson/ManageLesson';
+import GiveExam from './pages/exam/GiveExam';
+import Login from './pages/auth/Login';
+import Logout from './pages/auth/Logout';
+import Register from './pages/auth/Register';
 
 // import Login from './components/Login';
 // import Logout from './components/Logout';
 // import RedirectTo from './components/RedirectTo';
 // import NotFound from './components/NotFound';
 
-// const PrivateRoute = ({component: Component, ...rest}) => {
-//     const token = JSON.parse(localStorage.getItem('token'));
-//     return token ? (
-//         <Route { ...rest } render={ matchProps => (
-//             <PrivateLayout>
-//                 <RedirectTo/>
-//                 <Component { ...matchProps } />
-//             </PrivateLayout>
-//         ) }/>
-//     ) : <Redirect to="/login"/>;
-// };
-//
-
-const PublicRoute = ({component: Component, ...rest}) => {
-    return (
+const PrivateRoute = ({component: Component, ...rest}) => {
+    const token = localStorage.getItem('token');
+    return token ? (
         <Route { ...rest } render={ matchProps => (
             <DefaultLayout>
                 <Component { ...matchProps } />
             </DefaultLayout>
         ) }/>
-    );
+    ) : <Redirect to="/login"/>;
+};
+
+
+const PublicRoute = ({component: Component, ...rest}) => {
+    const token = localStorage.getItem('token');
+    return !token ? (
+        <Route { ...rest } render={ matchProps => (
+            <Component { ...matchProps } />
+        ) }/>
+    ) : <Redirect to="/"/>;
 };
 
 class Root extends Component {
@@ -41,10 +43,14 @@ class Root extends Component {
         return (
             <Router>
                 <Switch>
-                  <PublicRoute exact path="/course" component={ ManageCourse }/>
-                    <PublicRoute exact path="/lesson" component={ ManageLesson }/>
+                  <PrivateRoute exact path="/course" component={ ManageCourse }/>
+                  <PrivateRoute exact path="/lesson" component={ ManageLesson }/>
+                  <PrivateRoute exact path="/exam" component={ GiveExam }/>
+                  <PrivateRoute exact path="/logout" component={ Logout }/>
                   {/*<PublicRoute path="/resource-list/:resourceId" component={ EditResource }/>*/}
-                  <PublicRoute exact path="/" component={ ManageCourse }/>
+                  <PrivateRoute exact path="/" component={ GiveExam }/>
+                  <PublicRoute exact path="/login" component={ Login }/>
+                  <PublicRoute exact path="/register" component={ Register }/>
                 </Switch>
             </Router>
         );

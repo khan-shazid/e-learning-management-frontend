@@ -10,15 +10,21 @@ class Sidebar extends Component {
         super(props);
         this.state = {
             activeTab: window.location.pathname,
-            parentTab: ''
+            parentTab: '',
+            role: ''
         };
     }
 
     componentDidMount = () =>{
+      let role = localStorage.getItem('role');
+      this.setState({
+        role
+      })
       console.log("route",this.state.activeTab)
     }
 
     render() {
+        let { role } = this.state;
         return (
           <nav id="sidebar">
               <div className="sidebar-header">
@@ -41,28 +47,41 @@ class Sidebar extends Component {
                           </li>
                       </ul>
                   </li>*/}
-                  <li className={ (this.state.activeTab === '/' || this.state.activeTab === '/course') ? 'active' : '' }>
-                        <Link to='/course'
-                              onClick={ (e) => {
-                                  this.setState({
-                                      activeTab: '/course'
-                                  });
-                              } }>
-                            Course
-                        </Link>
-                  </li>
-                  <li className={ (this.state.activeTab.includes('/lesson')) ? 'active' : '' }>
-                    <Link to='/lesson'
+                  {
+                    role=='admin' &&
+                    <li className={ (this.state.activeTab === '/' || this.state.activeTab === '/course') ? 'active' : '' }>
+                          <Link to='/course'
+                                onClick={ (e) => {
+                                    this.setState({
+                                        activeTab: '/course'
+                                    });
+                                } }>
+                              Course
+                          </Link>
+                    </li>
+                  }
+                  {
+                    role=='admin' &&
+                    <li className={ (this.state.activeTab.includes('/lesson')) ? 'active' : '' }>
+                      <Link to='/lesson'
+                            onClick={ (e) => {
+                                this.setState({
+                                    activeTab: '/lesson'
+                                });
+                            } }>
+                          Lesson
+                      </Link>
+                    </li>
+                  }
+                  <li className={ (this.state.activeTab.includes('/exam')) ? 'active' : '' }>
+                    <Link to='/exam'
                           onClick={ (e) => {
                               this.setState({
-                                  activeTab: '/lesson'
+                                  activeTab: '/exam'
                               });
                           } }>
-                        Lesson
+                        Exam
                     </Link>
-                  </li>
-                  <li>
-                      <a href="#">Contact</a>
                   </li>
               </ul>
           </nav>

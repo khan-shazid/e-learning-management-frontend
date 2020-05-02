@@ -5,8 +5,11 @@ import './index.css';
 import App from './App';
 import Root from './app/index.js';
 import store from './app/store';
+import { toast } from 'react-toastify';
 
 import * as serviceWorker from './serviceWorker';
+
+toast.configure()
 
 ReactDOM.render(
     <Provider store={ store }>
